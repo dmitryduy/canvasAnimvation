@@ -42,16 +42,12 @@ export default class World {
   }
 
   createParticle() {
-    if (this.options.isRandomParticleRadius) {
-      return new Particle(
-        this.options.maxParticleRadius * Math.random() + 1,
-        this.options.isRandomParticleColor,
-        this.options.speed,
-        this.options.lifeOfParticle);
-    }
+    const radius = this.options.isRandomParticleRadius
+      ? this.options.maxParticleRadius * Math.random() + 1
+      : this.options.maxParticleRadius;
 
     return new Particle(
-      this.options.maxParticleRadius,
+      radius,
       this.options.isRandomParticleColor,
       this.options.speed,
       this.options.lifeOfParticle);
