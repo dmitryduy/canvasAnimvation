@@ -3,6 +3,7 @@ import World from "./world.js";
 const getDOMElement = (className) => document.querySelector(className);
 
 const createNumberListener = (element, option, maxValue=Infinity, minValue=-Infinity) => {
+  console.log(element)
   element.addEventListener('input', (e) => {
     const value = +e.target.value;
     if (value > maxValue || !value || value < minValue) {
@@ -28,6 +29,7 @@ createNumberListener(getDOMElement('.line-length'), 'maxLengthOfLine');
 createNumberListener(getDOMElement('.particles-speed'), 'speed', 150, 1);
 createNumberListener(getDOMElement('.particles-life'), 'lifeOfParticle', 1000, 50);
 createNumberListener(getDOMElement('.max-particles-radius'), 'maxParticleRadius', 150, 5);
+createNumberListener(getDOMElement('.line-width'), 'lineWidth', 20, 1);
 
 createCheckboxListener(getDOMElement('.random-radius'), 'isRandomParticleRadius');
 createCheckboxListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine');

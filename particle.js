@@ -1,9 +1,11 @@
 export default class Particle {
   circleColor = ["#BF3030", "#33CCCC", "#679B00", "#9FEE00", "#FF4040"];
   lifeOfParticle = null;
+  startRadius = null;
 
   constructor(radius, isRandomColor, stepSpeed, lifeOfParticle) {
     this.radius = radius;
+    this.startRadius = radius;
     this.lifeOfParticle = lifeOfParticle;
 
     this.x = Math.floor((window.innerWidth - this.radius * 2) * Math.random() + this.radius);

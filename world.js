@@ -14,6 +14,7 @@ export default class World {
     isRandomParticleColor: false,
     isInfiniteLife: false,
     lifeOfParticle: 1000,
+    lineWidth: 1,
     speed: 10,
   }
 
@@ -62,7 +63,7 @@ export default class World {
         const lineWidth = 1 - dist / this.options.maxLengthOfLine;
 
         if (this.options.isInfiniteLine) {
-          this.canvasInstance.drawLine(lineWidth, from, to);
+          this.canvasInstance.drawLine(this.options.lineWidth, from, to);
           continue;
         }
 
