@@ -10,12 +10,24 @@
 <body>
 <div class="form">
     <label>
-        Количество шариков(макс 100):
-        <input type="number" class="particles-count">
+        Количество кругов(макс 100):
+        <input type="number" class="particles-count" value="10">
     </label>
     <label>
         Максимальная длина линии:
-        <input type="number" class="line-length">
+        <input type="number" class="line-length" value="300">
+    </label>
+    <label>
+        Максимальный радиус кругов(макс 150, мин 5):
+        <input type="number" class="max-particles-radius" value="10">
+    </label>
+    <label>
+        Скорость кругов(макс 150):
+        <input type="number" class="particles-speed" value="10">
+    </label>
+    <label>
+        Длительность жизни кругов(макс 1000, мин 50):
+        <input type="number" class="particles-life" value="1000">
     </label>
     <label class="container">
         <div> Бесконечная ли линия?</div>
@@ -25,6 +37,16 @@
     <label class="container">
         <div> Рандомный радиус кругов?</div>
         <input type="checkbox" class="random-radius">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        <div> Рандомные цвета кругов?</div>
+        <input type="checkbox" class="random-colors">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        <div> Бесконечная ли жизнь кругов?</div>
+        <input type="checkbox" class="is-particles-infinite-life">
         <span class="checkmark"></span>
     </label>
 </div>

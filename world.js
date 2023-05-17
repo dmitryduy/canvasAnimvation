@@ -8,9 +8,13 @@ export default class World {
   options = {
     isRandomParticleRadius: true,
     maxParticleRadius: 10,
-    countOfParticles: 5,
+    countOfParticles: 10,
     isInfiniteLine: false,
     maxLengthOfLine: 300,
+    isRandomParticleColor: false,
+    isInfiniteLife: false,
+    lifeOfParticle: 1000,
+    speed: 10,
   }
 
   constructor(options) {
@@ -39,10 +43,18 @@ export default class World {
 
   createParticle() {
     if (this.options.isRandomParticleRadius) {
-      return new Particle(this.options.maxParticleRadius * Math.random() + 1);
+      return new Particle(
+        this.options.maxParticleRadius * Math.random() + 1,
+        this.options.isRandomParticleColor,
+        this.options.speed,
+        this.options.lifeOfParticle);
     }
 
-    return new Particle(this.options.maxParticleRadius);
+    return new Particle(
+      this.options.maxParticleRadius,
+      this.options.isRandomParticleColor,
+      this.options.speed,
+      this.options.lifeOfParticle);
   }
 
   drawLines() {
@@ -67,8 +79,13 @@ export default class World {
   }
 
   drawParticles() {
-    this.particles.forEach((particle) => {
-      particle.changeDirection();
+    this.particles.forEach((particle, index) => {
+      particle.changeDirection(this.options.isInfiniteLife);
+
+      if (!this.options.isInfiniteLife && particle.radius <= 1) {
+        this.particles.splice(index, 1);
+        this.particles.push(this.createParticle());
+      }
       this.canvasInstance.drawCircle(particle.color, [particle.x, particle.y], particle.radius);
     });
   }
