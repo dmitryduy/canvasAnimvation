@@ -3,22 +3,36 @@
 
 <head>
     <meta charset="utf-8">
-    <title>React! React! React!</title>
-    <style>
-        .canvas {
-            box-sizing: border-box;
-
-        }
-        body{
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <title>Animation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<div class="form">
+    <label>
+        Количество шариков(макс 100):
+        <input type="number" class="particles-count">
+    </label>
+    <label>
+        Максимальная длина линии:
+        <input type="number" class="line-length">
+    </label>
+    <label class="container">
+        <div> Бесконечная ли линия?</div>
+        <input type="checkbox" class="is-infinite-line">
+        <span class="checkmark"></span>
+    </label>
+    <label class="container">
+        <div> Рандомный радиус кругов?</div>
+        <input type="checkbox" class="random-radius">
+        <span class="checkmark"></span>
+    </label>
+</div>
 <canvas class="canvas"></canvas>
-    <script src="js.js">
+<script src="canvas.js" type="module"></script>
+<script src="particle.js" type="module"></script>
+<script src="world.js" type="module"></script>
+    <script src="js.js" type="module">
     </script>
 </body>
 
