@@ -2,7 +2,7 @@ import World from "./world.js";
 
 const getDOMElement = (className) => document.querySelector(className);
 
-const createNumberListener = (element, option, maxValue=Infinity, minValue=-Infinity) => {
+const createInputListener = (element, option, maxValue=Infinity, minValue=-Infinity) => {
   element.addEventListener('input', (e) => {
     const value = +e.target.value;
     if (value > maxValue || !value || value < minValue) {
@@ -12,38 +12,30 @@ const createNumberListener = (element, option, maxValue=Infinity, minValue=-Infi
   });
 }
 
-const createCheckboxListener = (element, option) => {
+const createChangeListener = (element, option) => {
   element.addEventListener('change', (e) => {
     world.restartLife({[option]: e.target.checked});
   });
 }
 
-const createColorPickerListener = (element, option) => {
-  element.addEventListener('change', (e) => {
-    world.restartLife({[option]: e.target.value});
-  });
-}
-
-
 window.addEventListener('resize', () => {
   canvas.setSize(window.innerWidth, window.innerHeight);
 });
 
-createNumberListener(getDOMElement('.particles-count'), 'countOfParticles', 100, 1);
-createNumberListener(getDOMElement('.line-length'), 'maxLengthOfLine');
-createNumberListener(getDOMElement('.particles-speed'), 'speed', 150, 1);
-createNumberListener(getDOMElement('.particles-life'), 'lifeOfParticle', 1000, 50);
-createNumberListener(getDOMElement('.max-particles-radius'), 'maxParticleRadius', 150, 5);
-createNumberListener(getDOMElement('.line-width'), 'lineWidth', 20, 1);
+createInputListener(getDOMElement('.particles-count'), 'countOfParticles', 100, 1);
+createInputListener(getDOMElement('.line-length'), 'maxLengthOfLine');
+createInputListener(getDOMElement('.particles-speed'), 'speed', 150, 1);
+createInputListener(getDOMElement('.particles-life'), 'lifeOfParticle', 1000, 50);
+createInputListener(getDOMElement('.max-particles-radius'), 'maxParticleRadius', 150, 5);
+createInputListener(getDOMElement('.line-width'), 'lineWidth', 20, 1);
 
-createCheckboxListener(getDOMElement('.random-radius'), 'isRandomParticleRadius');
-createCheckboxListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine');
-createCheckboxListener(getDOMElement('.random-colors'), 'isRandomParticleColor');
-createCheckboxListener(getDOMElement('.is-particles-infinite-life'), 'isInfiniteLife');
-
-createColorPickerListener(getDOMElement('.color-particle-picker'), 'particleColor');
-createColorPickerListener(getDOMElement('.color-line-picker'), 'lineColor');
-createColorPickerListener(getDOMElement('.color-background-picker'), 'bgColor');
+createChangeListener(getDOMElement('.random-radius'), 'isRandomParticleRadius');
+createChangeListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine');
+createChangeListener(getDOMElement('.random-colors'), 'isRandomParticleColor');
+createChangeListener(getDOMElement('.is-particles-infinite-life'), 'isInfiniteLife');
+createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor');
+createChangeListener(getDOMElement('.color-line-picker'), 'lineColor');
+createChangeListener(getDOMElement('.color-background-picker'), 'bgColor');
 
 
 const world = new World();
