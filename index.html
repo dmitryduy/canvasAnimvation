@@ -11,7 +11,7 @@
 <button class="hidden">Настройки</button>
 <div class="form">
   <label>
-    Количество круга(макс 100):
+    Количество частиц(макс 100):
     <input type="number" class="particles-count" value="50">
   </label>
   <label>
@@ -19,15 +19,15 @@
     <input type="number" class="line-length" value="300">
   </label>
   <label>
-    Максимальный радиус круга(макс 150, мин 5):
+    Максимальный радиус частицы(макс 150, мин 5):
     <input type="number" class="max-particles-radius" value="10">
   </label>
   <label>
-    Скорость круга(макс 150):
+    Скорость частицы(макс 150):
     <input type="number" class="particles-speed" value="2">
   </label>
   <label>
-    Длительность жизни круга(макс 1000, мин 50):
+    Длительность жизни частицы(макс 1000, мин 50):
     <input type="number" class="particles-life" value="1000">
   </label>
   <label>
@@ -45,22 +45,37 @@
     <span class="checkmark"></span>
   </label>
   <label class="container">
-    <div> Случайный радиус круга</div>
+    <div> Случайный радиус частицы</div>
     <input type="checkbox" class="random-radius">
     <span class="checkmark"></span>
   </label>
   <label class="container">
-    <div> Случайный цвет круга</div>
+    <div> Случайный цвет частицы</div>
     <input type="checkbox" class="random-colors">
     <span class="checkmark"></span>
   </label>
   <label class="container">
-    <div>Не уменьшать круг</div>
+    <div>Не уменьшать частицу</div>
     <input type="checkbox" class="is-particles-infinite-life">
     <span class="checkmark"></span>
   </label>
+  <label class="container">
+    <div>Круги</div>
+    <input type="checkbox" class="is-circle" checked>
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div>Квадраты</div>
+    <input type="checkbox" class="is-square">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div>Треугольники</div>
+    <input type="checkbox" class="is-triangle">
+    <span class="checkmark"></span>
+  </label>
   <label class="color-label">
-    <div> Цвет круга</div>
+    <div> Цвет частицы</div>
     <input type="color" value="#BF3030" class="color-particle-picker">
   </label>
   <label class="color-label">

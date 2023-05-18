@@ -1,17 +1,17 @@
 export default class Particle {
-  colors = ["#33CCCC", "#679B00", "#9FEE00", "#FF4040"];
   lifeOfParticle = null;
+  type = null;
 
-  constructor(radius, isRandomColor, stepSpeed, lifeOfParticle, color) {
+  constructor(radius, isRandomColor, stepSpeed, lifeOfParticle, color, type) {
     this.radius = radius;
     this.lifeOfParticle = lifeOfParticle;
-    this.colors.push(color);
+    this.type = type;
 
     this.x = Math.floor((window.innerWidth - this.radius * 2) * Math.random() + this.radius);
     this.y = Math.floor((innerHeight - this.radius * 2) * Math.random() + this.radius);
     this.directionX = stepSpeed * Math.random();
     this.directionY = stepSpeed * Math.random();
-    this.color = isRandomColor ? this.colors[Math.floor(this.colors.length * Math.random())] : color;
+    this.color = isRandomColor ? this.getRandomColor() : color;
   }
 
   changeDirection(isInfiniteLife) {
@@ -21,7 +21,16 @@ export default class Particle {
     this.y >= window.innerHeight - this.radius || this.y <= this.radius ? this.directionY *= -1 : this.directionY;
 
     if (!isInfiniteLife) {
-      this.radius-= this.radius / (this.lifeOfParticle + Math.random() * this.lifeOfParticle);
+      this.radius -= this.radius / (this.lifeOfParticle + Math.random() * this.lifeOfParticle);
     }
+  }
+
+  getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 }

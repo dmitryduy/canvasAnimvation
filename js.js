@@ -30,6 +30,9 @@ createChangeListener(getDOMElement('.random-radius'), 'isRandomParticleRadius', 
 createChangeListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine', 'checked');
 createChangeListener(getDOMElement('.random-colors'), 'isRandomParticleColor', 'checked');
 createChangeListener(getDOMElement('.is-particles-infinite-life'), 'isInfiniteLife', 'checked');
+createChangeListener(getDOMElement('.is-circle'), 'isCircle', 'checked');
+createChangeListener(getDOMElement('.is-square'), 'isSquare', 'checked');
+createChangeListener(getDOMElement('.is-triangle'), 'isTriangle', 'checked');
 createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor', 'value');
 createChangeListener(getDOMElement('.color-line-picker'), 'lineColor', 'value');
 createChangeListener(getDOMElement('.color-background-picker'), 'bgColor', 'value');
@@ -48,6 +51,7 @@ button.addEventListener('click', () => {
 isMusicCheckbox.addEventListener('change', (e) => {
   if (e.target.checked) {
     audio.play();
+    audio.loop = true;
   } else {
     audio.pause();
   }

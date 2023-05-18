@@ -19,7 +19,10 @@ export default class World {
     minParticleRadius: 5,
     speed: 2,
     particleColor: '#BF3030',
-    bgColor: '#030101'
+    bgColor: '#030101',
+    isSquare: false,
+    isTriangle: false,
+    isCircle: true,
   }
 
   constructor(options) {
@@ -56,7 +59,8 @@ export default class World {
       this.options.isRandomParticleColor,
       this.options.speed,
       this.options.lifeOfParticle,
-      this.options.particleColor));
+      this.options.particleColor,
+      this.getRandomParticleType()));
   }
 
   drawLines() {
@@ -87,6 +91,27 @@ export default class World {
     }
   }
 
+  getAvailableParticleTypes() {
+    const availableTypes = [];
+
+    if (this.options.isCircle) {
+      availableTypes.push('circle');
+    }
+    if (this.options.isSquare) {
+      availableTypes.push('square')
+    }
+    if (this.options.isTriangle) {
+      availableTypes.push('triangle');
+    }
+
+    return availableTypes;
+  }
+
+  getRandomParticleType() {
+    const availableTypes = this.getAvailableParticleTypes();
+    return availableTypes[Math.floor(Math.random() * availableTypes.length)];
+  }
+
   destroyAndCreateParticle(index) {
     this.particles.splice(index, 1);
     this.createParticle();
@@ -100,8 +125,26 @@ export default class World {
         this.destroyAndCreateParticle(index);
         return;
       }
-      this.canvasInstance.drawCircle(particle.color, [particle.x, particle.y], particle.radius);
+
+      const particleInfo = [particle.color, [particle.x, particle.y], particle.radius];
+
+      const drawer = this.getDrawerByParticleType(particle.type);
+      drawer(...particleInfo);
     });
+  }
+
+  getDrawerByParticleType(type) {
+    const canvasInstance = this.canvasInstance;
+    switch (type) {
+      case 'circle':
+        return canvasInstance.drawCircle.bind(canvasInstance);
+      case 'square':
+        return canvasInstance.drawSquare.bind(canvasInstance);
+      case 'triangle':
+        return canvasInstance.drawTriangle.bind(canvasInstance);
+      default:
+        return canvasInstance.drawCircle.bind(canvasInstance);
+    }
   }
 
   startAnimate() {
