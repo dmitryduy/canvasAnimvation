@@ -9,6 +9,13 @@
     height: 100%;
     overflow: auto;
     margin-bottom: 50px;
+    margin-top: 40px;
+    transform: translateX(-100%);
+    transition: .3s;
+}
+
+.form.active {
+    transform: translateX(0);
 }
 
 .canvas {
@@ -114,6 +121,29 @@ label {
     gap: 5px;
     align-items: center;
 }
-.color-label  input {
+
+.color-label input {
     order: -1;
+}
+
+button {
+    position: fixed;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, .6);
+    border: 1px solid white;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    top: 5px;
+    left: 10px;
+    font-size: 16px;
+    transition: .3s;
+}
+
+button.hidden {
+    opacity: .4;
+}
+
+button:hover {
+    opacity: 1;
 }

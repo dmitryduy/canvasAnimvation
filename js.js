@@ -1,5 +1,6 @@
 import World from "./world.js";
 
+
 const getDOMElement = (selector) => document.querySelector(selector);
 
 const createInputListener = (element, option, maxValue=Infinity, minValue=-Infinity) => {
@@ -33,6 +34,24 @@ createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor', '
 createChangeListener(getDOMElement('.color-line-picker'), 'lineColor', 'value');
 createChangeListener(getDOMElement('.color-background-picker'), 'bgColor', 'value');
 
+const button = getDOMElement('button');
+const form = getDOMElement('.form');
+const isMusicCheckbox = getDOMElement('.is-music');
+
+const audio = new Audio('audio.mp3');
+
+button.addEventListener('click', () => {
+  form.classList.toggle('active');
+  button.classList.toggle('hidden');
+})
+
+isMusicCheckbox.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+})
 
 const world = new World();
 const canvas = world.getCanvas();
