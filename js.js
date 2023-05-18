@@ -1,6 +1,6 @@
 import World from "./world.js";
 
-const getDOMElement = (className) => document.querySelector(className);
+const getDOMElement = (selector) => document.querySelector(selector);
 
 const createInputListener = (element, option, maxValue=Infinity, minValue=-Infinity) => {
   element.addEventListener('input', (e) => {
@@ -12,15 +12,11 @@ const createInputListener = (element, option, maxValue=Infinity, minValue=-Infin
   });
 }
 
-const createChangeListener = (element, option) => {
+const createChangeListener = (element, option, targetField) => {
   element.addEventListener('change', (e) => {
-    world.restartLife({[option]: e.target.checked});
+    world.restartLife({[option]: e.target[targetField]});
   });
 }
-
-window.addEventListener('resize', () => {
-  canvas.setSize(window.innerWidth, window.innerHeight);
-});
 
 createInputListener(getDOMElement('.particles-count'), 'countOfParticles', 100, 1);
 createInputListener(getDOMElement('.line-length'), 'maxLengthOfLine');
@@ -29,16 +25,20 @@ createInputListener(getDOMElement('.particles-life'), 'lifeOfParticle', 1000, 50
 createInputListener(getDOMElement('.max-particles-radius'), 'maxParticleRadius', 150, 5);
 createInputListener(getDOMElement('.line-width'), 'lineWidth', 20, 1);
 
-createChangeListener(getDOMElement('.random-radius'), 'isRandomParticleRadius');
-createChangeListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine');
-createChangeListener(getDOMElement('.random-colors'), 'isRandomParticleColor');
-createChangeListener(getDOMElement('.is-particles-infinite-life'), 'isInfiniteLife');
-createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor');
-createChangeListener(getDOMElement('.color-line-picker'), 'lineColor');
-createChangeListener(getDOMElement('.color-background-picker'), 'bgColor');
+createChangeListener(getDOMElement('.random-radius'), 'isRandomParticleRadius', 'checked');
+createChangeListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine', 'checked');
+createChangeListener(getDOMElement('.random-colors'), 'isRandomParticleColor', 'checked');
+createChangeListener(getDOMElement('.is-particles-infinite-life'), 'isInfiniteLife', 'checked');
+createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor', 'value');
+createChangeListener(getDOMElement('.color-line-picker'), 'lineColor', 'value');
+createChangeListener(getDOMElement('.color-background-picker'), 'bgColor', 'value');
 
 
 const world = new World();
 const canvas = world.getCanvas();
+
+window.addEventListener('resize', () => {
+  canvas.setSize(window.innerWidth, window.innerHeight);
+});
 
 world.startLife();
