@@ -5,22 +5,32 @@
     gap: 10px;
     top: 0;
     left: 0;
-    padding: 10px;
-    height: 100%;
+    padding: 10px 10px 60px 10px;
+    max-height: 100%;
     overflow: auto;
-    margin-bottom: 50px;
-    margin-top: 40px;
+    margin-top: 50px;
     transform: translateX(-100%);
     transition: .3s;
 }
+
+.form::-webkit-scrollbar {
+       width: 2px;
+       background-color: #555;
+       border-radius: 2px;
+   }
+.form::-webkit-scrollbar-thumb {
+     width: 4px;
+     background-color: white;
+     border-radius: 2px;
+}
+
 
 .form.active {
     transform: translateX(0);
 }
 
-.canvas {
+* {
     box-sizing: border-box;
-
 }
 
 body {
@@ -29,15 +39,13 @@ body {
 }
 
 input[type="number"] {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
+    max-width: 200px;
+    margin-top: 5px;
 }
 
 input[type="color"] {
@@ -53,9 +61,12 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 label {
-    display: block;
-    font-size: 1rem;
+    font-size: 20px;
     color: #fff;
+}
+
+.numeric>input {
+    font-size: 20px;
 }
 
 .container {
@@ -63,7 +74,6 @@ label {
     position: relative;
     padding-left: 35px;
     cursor: pointer;
-    font-size: 22px;
     user-select: none;
 }
 
@@ -116,7 +126,6 @@ label {
 
 .color-label {
     display: flex;
-    font-size: 22px;
     margin-left: -5px;
     gap: 5px;
     align-items: center;

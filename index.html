@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Animation</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,28 +11,28 @@
 <body>
 <button class="hidden">Настройки</button>
 <div class="form">
-  <label>
-    Количество частиц(макс 100):
+  <label class="numeric">
+    <div>Количество частиц(макс 100):</div>
     <input type="number" class="particles-count" value="50">
   </label>
-  <label>
-    Максимальная длина линии:
+  <label class="numeric">
+    <div>Максимальная длина линии:</div>
     <input type="number" class="line-length" value="300">
   </label>
-  <label>
-    Максимальный радиус частицы(макс 150, мин 5):
+  <label class="numeric">
+    <div>Максимальный радиус частицы(мин 5, макс 150):</div>
     <input type="number" class="max-particles-radius" value="10">
   </label>
-  <label>
-    Скорость частицы(макс 150):
+  <label class="numeric">
+    <div>Скорость частицы(макс 150):</div>
     <input type="number" class="particles-speed" value="2">
   </label>
-  <label>
-    Длительность жизни частицы(макс 1000, мин 50):
+  <label class="numeric">
+    <div>Длительность жизни частицы(мин 50, макс 1000):</div>
     <input type="number" class="particles-life" value="1000">
   </label>
-  <label>
-    Ширина линий. Если линии бесконечны(макс 20):
+  <label class="numeric">
+    <div>Ширина линий. Если линии бесконечны(макс 20):</div>
     <input type="number" class="line-width" value="1">
   </label>
   <label class="container">
