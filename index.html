@@ -2,64 +2,77 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Animation</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>Animation</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="form">
-    <label>
-        Количество кругов(макс 100):
-        <input type="number" class="particles-count" value="10">
-    </label>
-    <label>
-        Максимальная длина линии:
-        <input type="number" class="line-length" value="300">
-    </label>
-    <label>
-        Максимальный радиус кругов(макс 150, мин 5):
-        <input type="number" class="max-particles-radius" value="10">
-    </label>
-    <label>
-        Скорость кругов(макс 150):
-        <input type="number" class="particles-speed" value="10">
-    </label>
-    <label>
-        Длительность жизни кругов(макс 1000, мин 50):
-        <input type="number" class="particles-life" value="1000">
-    </label>
-    <label>
-        Ширина линий. Если линии бесконечны(макс 100):
-        <input type="number" class="line-width" value="1">
-    </label>
-    <label class="container">
-        <div> Бесконечная ли линия?</div>
-        <input type="checkbox" class="is-infinite-line">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        <div> Рандомный радиус кругов?</div>
-        <input type="checkbox" class="random-radius">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        <div> Рандомные цвета кругов?</div>
-        <input type="checkbox" class="random-colors">
-        <span class="checkmark"></span>
-    </label>
-    <label class="container">
-        <div> Бесконечная ли жизнь кругов?</div>
-        <input type="checkbox" class="is-particles-infinite-life">
-        <span class="checkmark"></span>
-    </label>
+  <label>
+    Количество кругов(макс 100):
+    <input type="number" class="particles-count" value="50">
+  </label>
+  <label>
+    Максимальная длина линии:
+    <input type="number" class="line-length" value="300">
+  </label>
+  <label>
+    Максимальный радиус кругов(макс 150, мин 5):
+    <input type="number" class="max-particles-radius" value="10">
+  </label>
+  <label>
+    Скорость кругов(макс 150):
+    <input type="number" class="particles-speed" value="2">
+  </label>
+  <label>
+    Длительность жизни кругов(макс 1000, мин 50):
+    <input type="number" class="particles-life" value="1000">
+  </label>
+  <label>
+    Ширина линий. Если линии бесконечны(макс 20):
+    <input type="number" class="line-width" value="1">
+  </label>
+  <label class="container">
+    <div> Бесконечная ли линия?</div>
+    <input type="checkbox" class="is-infinite-line">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div> Рандомный радиус кругов?</div>
+    <input type="checkbox" class="random-radius">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div> Рандомные цвета кругов?</div>
+    <input type="checkbox" class="random-colors">
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div> Бесконечная ли жизнь кругов?</div>
+    <input type="checkbox" class="is-particles-infinite-life">
+    <span class="checkmark"></span>
+  </label>
+  <label class="color-label">
+    <div> Цвет шаров</div>
+    <input type="color" value="#BF3030" class="color-particle-picker">
+  </label>
+  <label class="color-label">
+    <div> Цвет линий</div>
+    <input type="color" value="#BF3030" class="color-line-picker">
+  </label>
+  <label class="color-label">
+    <div> Цвет фона</div>
+    <input type="color" value="#030101" class="color-background-picker">
+  </label>
+
 </div>
 <canvas class="canvas"></canvas>
 <script src="canvas.js" type="module"></script>
 <script src="particle.js" type="module"></script>
 <script src="world.js" type="module"></script>
-    <script src="js.js" type="module">
-    </script>
+<script src="js.js" type="module">
+</script>
 </body>
 
 </html>

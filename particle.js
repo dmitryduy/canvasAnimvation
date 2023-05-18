@@ -1,18 +1,17 @@
 export default class Particle {
-  circleColor = ["#BF3030", "#33CCCC", "#679B00", "#9FEE00", "#FF4040"];
+  colors = ["#33CCCC", "#679B00", "#9FEE00", "#FF4040"];
   lifeOfParticle = null;
-  startRadius = null;
 
-  constructor(radius, isRandomColor, stepSpeed, lifeOfParticle) {
+  constructor(radius, isRandomColor, stepSpeed, lifeOfParticle, color) {
     this.radius = radius;
-    this.startRadius = radius;
     this.lifeOfParticle = lifeOfParticle;
+    this.colors.push(color);
 
     this.x = Math.floor((window.innerWidth - this.radius * 2) * Math.random() + this.radius);
     this.y = Math.floor((innerHeight - this.radius * 2) * Math.random() + this.radius);
     this.directionX = stepSpeed * Math.random();
     this.directionY = stepSpeed * Math.random();
-    this.color = isRandomColor ? this.circleColor[Math.floor(this.circleColor.length * Math.random())] : this.circleColor[0];
+    this.color = isRandomColor ? this.colors[Math.floor(this.colors.length * Math.random())] : color;
   }
 
   changeDirection(isInfiniteLife) {
@@ -22,7 +21,7 @@ export default class Particle {
     this.y >= window.innerHeight - this.radius || this.y <= this.radius ? this.directionY *= -1 : this.directionY;
 
     if (!isInfiniteLife) {
-      this.radius-= this.radius / this.lifeOfParticle;
+      this.radius-= this.radius / (this.lifeOfParticle + Math.random() * this.lifeOfParticle);
     }
   }
 }

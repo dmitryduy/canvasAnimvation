@@ -1,7 +1,6 @@
 export default class Canvas {
   canvas = null;
   ctx = null;
-  lineColor= "#BF3030";
 
   constructor(className) {
     if (Canvas._instance) {
@@ -15,13 +14,15 @@ export default class Canvas {
   setCtx(className) {
     this.canvas = document.querySelector(className);
     this.ctx = this.canvas.getContext('2d');
-
-    this.canvas.style.background = '#030101';
   }
 
-  drawLine(width, from, to) {
+  setBackgroundColor(color) {
+    this.canvas.style.background = color;
+  }
+
+  drawLine(color, width, from, to) {
     this.ctx.lineWidth = width;
-    this.ctx.strokeStyle = this.lineColor;
+    this.ctx.strokeStyle = color;
 
     this.ctx.beginPath();
     this.ctx.moveTo(...from);

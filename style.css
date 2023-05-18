@@ -6,15 +6,21 @@
     top: 0;
     left: 0;
     padding: 10px;
+    height: 100%;
+    overflow: auto;
+    margin-bottom: 50px;
 }
+
 .canvas {
     box-sizing: border-box;
 
 }
-body{
+
+body {
     margin: 0;
     padding: 0;
 }
+
 input[type="number"] {
     display: block;
     width: 100%;
@@ -23,8 +29,20 @@ input[type="number"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: rgba(0, 0, 0,.5);
+    background-color: rgba(0, 0, 0, .5);
     color: #fff;
+}
+
+input[type="color"] {
+    border: none;
+    background: none;
+    outline: none;
+    width: 35px;
+    height: 35px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border-radius: 5px;
 }
 
 label {
@@ -87,4 +105,15 @@ label {
     border: solid white;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
+}
+
+.color-label {
+    display: flex;
+    font-size: 22px;
+    margin-left: -5px;
+    gap: 5px;
+    align-items: center;
+}
+.color-label  input {
+    order: -1;
 }
