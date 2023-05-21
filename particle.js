@@ -17,11 +17,36 @@ export default class Particle {
   changeDirection(isInfiniteLife) {
     this.x += this.directionX;
     this.y += this.directionY;
+
     this.x >= window.innerWidth - this.radius || this.x <= this.radius ? this.directionX *= -1 : this.directionX;
     this.y >= window.innerHeight - this.radius || this.y <= this.radius ? this.directionY *= -1 : this.directionY;
 
     if (!isInfiniteLife) {
       this.radius -= this.radius / (this.lifeOfParticle + Math.random() * this.lifeOfParticle);
+    }
+  }
+
+  updateDirectionByQuadrant(quadrant) {
+    const isAvailableChangeX = !(this.x >= window.innerWidth - this.radius || this.x <= this.radius);
+    const isAvailableChangeY = !(this.y >= window.innerHeight - this.radius || this.y <= this.radius);
+
+    switch (quadrant) {
+      case 1:
+        isAvailableChangeX && (this.directionX = -Math.abs(this.directionX));
+        isAvailableChangeY && (this.directionY = Math.abs(this.directionY));
+        return;
+      case 2:
+        isAvailableChangeX && (this.directionX = Math.abs(this.directionX));
+        isAvailableChangeY && (this.directionY = Math.abs(this.directionY));
+        return;
+      case 3:
+        isAvailableChangeX && (this.directionX = Math.abs(this.directionX));
+        isAvailableChangeY && (this.directionY = -Math.abs(this.directionY));
+        return;
+      case 4:
+        isAvailableChangeX && (this.directionX = -Math.abs(this.directionX));
+        isAvailableChangeY && (this.directionY = -Math.abs(this.directionY));
+        return;
     }
   }
 

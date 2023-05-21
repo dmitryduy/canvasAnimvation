@@ -25,6 +25,7 @@ createInputListener(getDOMElement('.particles-speed'), 'speed', 150, 1);
 createInputListener(getDOMElement('.particles-life'), 'lifeOfParticle', 1000, 50);
 createInputListener(getDOMElement('.max-particles-radius'), 'maxParticleRadius', 150, 5);
 createInputListener(getDOMElement('.line-width'), 'lineWidth', 20, 1);
+createInputListener(getDOMElement('.repulsion'), 'mouseRepulsion', 500, 1);
 
 createChangeListener(getDOMElement('.random-radius'), 'isRandomParticleRadius', 'checked');
 createChangeListener(getDOMElement('.is-infinite-line'), 'isInfiniteLine', 'checked');
@@ -36,6 +37,7 @@ createChangeListener(getDOMElement('.is-triangle'), 'isTriangle', 'checked');
 createChangeListener(getDOMElement('.color-particle-picker'), 'particleColor', 'value');
 createChangeListener(getDOMElement('.color-line-picker'), 'lineColor', 'value');
 createChangeListener(getDOMElement('.color-background-picker'), 'bgColor', 'value');
+createChangeListener(getDOMElement('.is-mouse-repulsion'), 'isMouseRepulsion', 'value');
 
 const button = getDOMElement('button');
 const form = getDOMElement('.form');

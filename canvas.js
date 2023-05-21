@@ -59,10 +59,6 @@ export default class Canvas {
     }
     this.ctx.closePath();
     this.ctx.fill();
-
-
-
-
   }
 
   setSize(width, height) {

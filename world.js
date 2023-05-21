@@ -1,10 +1,12 @@
 import Canvas from "./canvas.js";
 import Particle from "./particle.js";
+import { Mouse } from "./mouse.js";
 
 export default class World {
   particles = [];
   requestAnimationId = null;
   canvasInstance = null;
+  mouseInstance = null;
   options = {
     isRandomParticleRadius: true,
     maxParticleRadius: 10,
@@ -23,6 +25,8 @@ export default class World {
     isSquare: false,
     isTriangle: false,
     isCircle: true,
+    isMouseRepulsion: true,
+    mouseRepulsion: 50,
   }
 
   constructor(options) {
@@ -34,6 +38,8 @@ export default class World {
 
     this.canvasInstance = new Canvas('.canvas');
     this.canvasInstance.setSize(window.innerWidth, window.innerHeight);
+
+    this.mouseInstance = new Mouse();
 
     this.setOptions(options);
   }
@@ -119,6 +125,12 @@ export default class World {
 
   drawParticles() {
     this.particles.forEach((particle, index) => {
+      const particleCoords = [particle.x, particle.y];
+
+      if (this.options.isMouseRepulsion && this.isMouseInBounds(particleCoords, particle.radius)) {
+        particle.updateDirectionByQuadrant(this.getQuadrant(this.mouseInstance.getCoords(), particleCoords));
+      }
+
       particle.changeDirection(this.options.isInfiniteLife);
 
       if (!this.options.isInfiniteLife && particle.radius <= 1) {
@@ -152,6 +164,31 @@ export default class World {
     this.drawLines();
     this.drawParticles();
     this.requestAnimationId = requestAnimationFrame(this.startAnimate.bind(this));
+  }
+
+  isMouseInBounds(particleCoords, particleRadius) {
+    const availableRadius = particleRadius + this.options.mouseRepulsion;
+    const [mouseX, mouseY] = [this.mouseInstance.posX, this.mouseInstance.posY];
+    const [particleX, particleY] = particleCoords;
+    const dist = Math.sqrt((mouseY - particleY) ** 2 + (mouseX - particleX) ** 2);
+
+    return dist <= availableRadius;
+  }
+
+  getQuadrant(pointCoords, centerCoords) {
+    const [pointX, pointY] = pointCoords;
+    const [centerX, centerY] = centerCoords;
+
+    if (pointX >= centerX && pointY <= centerY) {
+      return 1;
+    }
+    if (pointX <= centerX && pointY <= centerY) {
+      return 2;
+    }
+    if (pointX <= centerX && pointY >= centerY) {
+      return 3;
+    }
+    return 4;
   }
 
   startLife() {
