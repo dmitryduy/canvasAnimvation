@@ -26,7 +26,9 @@ export default class World {
     isTriangle: false,
     isCircle: true,
     isMouseRepulsion: true,
+    isMouseEncounter: false,
     mouseRepulsion: 50,
+    mouseEncounter: 50,
   }
 
   constructor(options) {
@@ -127,8 +129,14 @@ export default class World {
     this.particles.forEach((particle, index) => {
       const particleCoords = [particle.x, particle.y];
 
-      if (this.options.isMouseRepulsion && this.isMouseInBounds(particleCoords, particle.radius)) {
+      if (this.options.isMouseRepulsion
+        && this.isMouseInBounds(particleCoords, particle.radius + this.options.mouseRepulsion)) {
         particle.updateDirectionByQuadrant(this.getQuadrant(this.mouseInstance.getCoords(), particleCoords));
+      }
+
+      if (this.options.isMouseEncounter
+        && this.isMouseInBounds(particleCoords, particle.radius + this.options.mouseEncounter)) {
+        particle.updateDirectionToPoint(this.mouseInstance.getCoords());
       }
 
       particle.changeDirection(this.options.isInfiniteLife);
@@ -166,8 +174,7 @@ export default class World {
     this.requestAnimationId = requestAnimationFrame(this.startAnimate.bind(this));
   }
 
-  isMouseInBounds(particleCoords, particleRadius) {
-    const availableRadius = particleRadius + this.options.mouseRepulsion;
+  isMouseInBounds(particleCoords, availableRadius) {
     const [mouseX, mouseY] = [this.mouseInstance.posX, this.mouseInstance.posY];
     const [particleX, particleY] = particleCoords;
     const dist = Math.sqrt((mouseY - particleY) ** 2 + (mouseX - particleX) ** 2);

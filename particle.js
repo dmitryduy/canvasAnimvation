@@ -6,11 +6,11 @@ export default class Particle {
     this.radius = radius;
     this.lifeOfParticle = lifeOfParticle;
     this.type = type;
+    this.speed = stepSpeed;
 
     this.x = Math.floor((window.innerWidth - this.radius * 2) * Math.random() + this.radius);
     this.y = Math.floor((innerHeight - this.radius * 2) * Math.random() + this.radius);
-    this.directionX = stepSpeed * Math.random();
-    this.directionY = stepSpeed * Math.random();
+    this.setRandomDirection();
     this.color = isRandomColor ? this.getRandomColor() : color;
   }
 
@@ -48,6 +48,19 @@ export default class Particle {
         isAvailableChangeY && (this.directionY = -Math.abs(this.directionY));
         return;
     }
+  }
+
+  updateDirectionToPoint(pointCoords) {
+    const [pointX, pointY] = pointCoords;
+    const time = (Math.sqrt((pointX - this.x) ** 2 + (pointY - this.y) ** 2)) / this.speed;
+  
+    this.directionX = (pointX - this.x) / time;
+    this.directionY = (pointY - this.y) / time;
+  }
+
+  setRandomDirection() {
+    this.directionX = this.speed * Math.random();
+    this.directionY = this.speed * Math.random();
   }
 
   getRandomColor() {

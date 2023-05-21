@@ -24,7 +24,7 @@
     <input type="number" class="max-particles-radius" value="10">
   </label>
   <label class="numeric">
-    <div>Скорость частицы(макс 150):</div>
+    <div>Скорость частицы(макс 20):</div>
     <input type="number" class="particles-speed" value="2">
   </label>
   <label class="numeric">
@@ -38,6 +38,10 @@
   <label class="numeric">
     <div>Зона отталкивания частиц. Если включено отталкивание(макс 500):</div>
     <input type="number" class="repulsion" value="50">
+  </label>
+  <label class="numeric">
+    <div>Зона притягивания частиц. Если включено притягивание(макс 500):</div>
+    <input type="number" class="encounter" value="50">
   </label>
   <label class="container">
     <div>Включить музыку</div>
@@ -67,6 +71,11 @@
   <label class="container">
     <div>Отталкивание от мышки</div>
     <input type="checkbox" class="is-mouse-repulsion" checked>
+    <span class="checkmark"></span>
+  </label>
+  <label class="container">
+    <div>Притягивание к мыши</div>
+    <input type="checkbox" class="is-mouse-encounter">
     <span class="checkmark"></span>
   </label>
   <label class="container">
