@@ -1,6 +1,7 @@
 export default class Particle {
   lifeOfParticle = null;
   type = null;
+  encounter = 'none';
 
   constructor(radius, isRandomColor, stepSpeed, lifeOfParticle, color, type) {
     this.radius = radius;
@@ -15,6 +16,10 @@ export default class Particle {
   }
 
   changeDirection(isInfiniteLife) {
+    if (this.encounter === 'done') {
+      this.setRandomDirection();
+      this.encounter = 'none';
+    }
     this.x += this.directionX;
     this.y += this.directionY;
 
@@ -53,7 +58,7 @@ export default class Particle {
   updateDirectionToPoint(pointCoords) {
     const [pointX, pointY] = pointCoords;
     const time = (Math.sqrt((pointX - this.x) ** 2 + (pointY - this.y) ** 2)) / this.speed;
-  
+
     this.directionX = (pointX - this.x) / time;
     this.directionY = (pointY - this.y) / time;
   }
