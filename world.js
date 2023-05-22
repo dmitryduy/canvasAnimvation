@@ -10,6 +10,7 @@ export default class World {
   mouseInstance = null;
   options = {
     isRandomParticleRadius: true,
+    isRandomLineColor: false,
     isRandomParticleColor: false,
     isSquare: false,
     isRhombus: false,
@@ -87,14 +88,14 @@ export default class World {
           : this.options.maxLengthOfLine;
 
         const lineWidth = this.options.lineWidth - distance * this.options.lineWidth / maxLengthOfLine;
-
+        const lineColor = this.options.isRandomLineColor ? HelperManager.getRandomColor(): this.options.lineColor;
         if (this.options.isInfiniteLine) {
-          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, i.getCoords(), j.getCoords());
+          this.canvasInstance.drawLine(lineColor, lineWidth, i.getCoords(), j.getCoords());
           continue;
         }
 
         if (distance <= this.options.maxLengthOfLine) {
-          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, i.getCoords(), j.getCoords());
+          this.canvasInstance.drawLine(lineColor, lineWidth, i.getCoords(), j.getCoords());
         }
       }
     }

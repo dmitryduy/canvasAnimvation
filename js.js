@@ -17,7 +17,7 @@ formManager.createNumericInput(2, 'Скорость частицы(макс 20):
 formManager.createNumericInput(1000, 'Длительность жизни частицы(мин 50, макс 1000):', 'lifeOfParticle', 50, 1000);
 formManager.createNumericInput(1, 'Ширина линий. Если линии бесконечны(макс 20):', 'lineWidth', 1, 20);
 formManager.createNumericInput(50, 'Зона отталкивания частиц. Если включено отталкивание(макс 500):', 'mouseRepulsion', 1, 500);
-formManager.createNumericInput(50, 'Зона притягивания частиц. Если включено притягивание(макс 500):', 'mouseEncounter', 1, 500);
+formManager.createNumericInput(50, 'Зона притяжения частиц. Если включено притягивание(макс 500):', 'mouseEncounter', 1, 500);
 formManager.createNumericInput(1, 'Уничтожать частицу при радиусе:(макс 4):', 'destroyParticleIn', 1, 4);
 
 formManager.createMusicCheckbox(false, 'Включить музыку', 'audio.mp3');
@@ -25,9 +25,11 @@ formManager.createMusicCheckbox(false, 'Включить музыку', 'audio.m
 formManager.createCheckbox(false, 'Бесконечные линии', 'isInfiniteLine');
 formManager.createCheckbox(true, 'Случайный радиус частицы', 'isRandomParticleRadius');
 formManager.createCheckbox(false, 'Случайный цвет частицы', 'isRandomParticleColor');
+formManager.createCheckbox(false, 'Случайны цвет линиц(возможна эпилепсия)', 'isRandomLineColor');
 formManager.createCheckbox(false, 'Бесконечная жизнь частицы', 'isInfiniteLife');
 formManager.createCheckbox(true, 'Отталкивание от мышки', 'isMouseRepulsion');
-formManager.createCheckbox(false, 'Притягивание к мыши', 'isMouseEncounter');
+formManager.createCheckbox(false, 'Притяжение к мыши', 'isMouseEncounter');
+
 formManager.createCheckbox(true, 'Круги', 'isCircle');
 formManager.createCheckbox(false, 'Ромбы', 'isRhombus');
 formManager.createCheckbox(false, 'Квадраты', 'isSquare');
