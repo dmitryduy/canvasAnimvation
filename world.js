@@ -1,6 +1,7 @@
 import Canvas from "./canvas.js";
 import Particle from "./particle.js";
-import { Mouse } from "./mouse.js";
+import Mouse from "./mouse.js";
+import HelperManager from "./helperManager.js";
 
 export default class World {
   particles = [];
@@ -9,26 +10,27 @@ export default class World {
   mouseInstance = null;
   options = {
     isRandomParticleRadius: true,
-    maxParticleRadius: 10,
-    countOfParticles: 50,
-    isInfiniteLine: false,
-    maxLengthOfLine: 300,
     isRandomParticleColor: false,
-    isInfiniteLife: false,
-    lifeOfParticle: 1000,
-    lineWidth: 1,
-    lineColor: '#BF3030',
-    minParticleRadius: 5,
-    speed: 2,
-    particleColor: '#BF3030',
-    bgColor: '#030101',
     isSquare: false,
     isTriangle: false,
     isCircle: true,
     isMouseRepulsion: true,
     isMouseEncounter: false,
+    isInfiniteLine: false,
+    isInfiniteLife: false,
+    maxParticleRadius: 10,
+    countOfParticles: 50,
+    maxLengthOfLine: 300,
+    lifeOfParticle: 1000,
+    lineWidth: 1,
+    minParticleRadius: 5,
+    speed: 2,
     mouseRepulsion: 50,
     mouseEncounter: 50,
+    destroyParticleIn: 1,
+    particleColor: '#BF3030',
+    bgColor: '#030101',
+    lineColor: '#BF3030',
   }
 
   constructor(options) {
@@ -68,7 +70,7 @@ export default class World {
       this.options.speed,
       this.options.lifeOfParticle,
       this.options.particleColor,
-      this.getRandomParticleType()));
+      this.getParticleType()));
   }
 
   drawLines() {
@@ -78,22 +80,20 @@ export default class World {
           continue;
         }
 
-        let dist = Math.sqrt((i.x - j.x) ** 2 + (i.y - j.y) ** 2);
-        const from = [i.x, i.y];
-        const to = [j.x, j.y];
+        const distance = HelperManager.computeDistance(i.getCoords(), j.getCoords());
         const maxLengthOfLine = this.options.isInfiniteLine
-          ? Math.sqrt(window.innerHeight ** 2 + window.innerWidth ** 2)
+          ? HelperManager.computeDistance(window.innerHeight, window.innerWidth)
           : this.options.maxLengthOfLine;
 
-        const lineWidth = this.options.lineWidth - dist * this.options.lineWidth / maxLengthOfLine;
+        const lineWidth = this.options.lineWidth - distance * this.options.lineWidth / maxLengthOfLine;
 
         if (this.options.isInfiniteLine) {
-          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, from, to);
+          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, i.getCoords(), j.getCoords());
           continue;
         }
 
-        if (dist <= this.options.maxLengthOfLine && i !== j) {
-          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, from, to);
+        if (distance <= this.options.maxLengthOfLine) {
+          this.canvasInstance.drawLine(this.options.lineColor, lineWidth, i.getCoords(), j.getCoords());
         }
       }
     }
@@ -106,7 +106,7 @@ export default class World {
       availableTypes.push('circle');
     }
     if (this.options.isSquare) {
-      availableTypes.push('square')
+      availableTypes.push('square');
     }
     if (this.options.isTriangle) {
       availableTypes.push('triangle');
@@ -115,7 +115,7 @@ export default class World {
     return availableTypes;
   }
 
-  getRandomParticleType() {
+  getParticleType() {
     const availableTypes = this.getAvailableParticleTypes();
     return availableTypes[Math.floor(Math.random() * availableTypes.length)];
   }
@@ -127,29 +127,25 @@ export default class World {
 
   drawParticles() {
     this.particles.forEach((particle, index) => {
-      const particleCoords = [particle.x, particle.y];
-
       if (this.options.isMouseRepulsion
-        && this.isMouseInBounds(particleCoords, particle.radius + this.options.mouseRepulsion)) {
-        particle.updateDirectionByQuadrant(this.getQuadrant(this.mouseInstance.getCoords(), particleCoords));
+        && this.isMouseInBounds(particle.getCoords(), particle.radius + this.options.mouseRepulsion)) {
+        particle.updateDirectionByQuadrant(HelperManager.getQuadrant(this.mouseInstance.getCoords(), particle.getCoords()));
       }
 
       if (this.options.isMouseEncounter
-        && this.isMouseInBounds(particleCoords, particle.radius + this.options.mouseEncounter)) {
+        && this.isMouseInBounds(particle.getCoords(), particle.radius + this.options.mouseEncounter)) {
         particle.updateDirectionToPoint(this.mouseInstance.getCoords());
       }
 
       particle.changeDirection(this.options.isInfiniteLife);
 
-      if (!this.options.isInfiniteLife && particle.radius <= 1) {
+      if (!this.options.isInfiniteLife && particle.radius <= this.options.destroyParticleIn) {
         this.destroyAndCreateParticle(index);
         return;
       }
 
-      const particleInfo = [particle.color, [particle.x, particle.y], particle.radius];
-
       const drawer = this.getDrawerByParticleType(particle.type);
-      drawer(...particleInfo);
+      drawer(particle.color, particle.getCoords(), particle.radius);
     });
   }
 
@@ -175,27 +171,7 @@ export default class World {
   }
 
   isMouseInBounds(particleCoords, availableRadius) {
-    const [mouseX, mouseY] = [this.mouseInstance.posX, this.mouseInstance.posY];
-    const [particleX, particleY] = particleCoords;
-    const dist = Math.sqrt((mouseY - particleY) ** 2 + (mouseX - particleX) ** 2);
-
-    return dist <= availableRadius;
-  }
-
-  getQuadrant(pointCoords, centerCoords) {
-    const [pointX, pointY] = pointCoords;
-    const [centerX, centerY] = centerCoords;
-
-    if (pointX >= centerX && pointY <= centerY) {
-      return 1;
-    }
-    if (pointX <= centerX && pointY <= centerY) {
-      return 2;
-    }
-    if (pointX <= centerX && pointY >= centerY) {
-      return 3;
-    }
-    return 4;
+    return HelperManager.computeDistance(this.mouseInstance.getCoords(), particleCoords) <= availableRadius;
   }
 
   startLife() {

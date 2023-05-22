@@ -18,6 +18,7 @@ formManager.createNumericInput(1000, 'Длительность жизни час
 formManager.createNumericInput(1, 'Ширина линий. Если линии бесконечны(макс 20):', 'lineWidth', 1, 20);
 formManager.createNumericInput(50, 'Зона отталкивания частиц. Если включено отталкивание(макс 500):', 'mouseRepulsion', 1, 500);
 formManager.createNumericInput(50, 'Зона притягивания частиц. Если включено притягивание(макс 500):', 'mouseEncounter', 1, 500);
+formManager.createNumericInput(1, 'Уничтожать частицу при радиусе:(макс 4):', 'destroyParticleIn', 1, 4);
 
 formManager.createMusicCheckbox(false, 'Включить музыку', 'audio.mp3');
 

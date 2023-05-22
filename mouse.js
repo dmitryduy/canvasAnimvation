@@ -1,4 +1,4 @@
-export class Mouse {
+export default class Mouse {
   posX = null;
   posY = null;
 
