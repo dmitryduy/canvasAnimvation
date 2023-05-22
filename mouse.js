@@ -9,8 +9,8 @@ export default class Mouse {
     });
 
     window.addEventListener('mouseout', () => {
-      this.posY = null;
-      this.posX = null;
+      this.posY = -Infinity;
+      this.posX = -Infinity;
     })
   }
 

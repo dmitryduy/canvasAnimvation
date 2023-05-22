@@ -56,8 +56,8 @@ export default class Particle {
   }
 
   setRandomDirection() {
-    this.directionX = this.speed * Math.random();
-    this.directionY = this.speed * Math.random();
+    this.directionX = this.speed * Math.random() - this.speed / 2;
+    this.directionY = this.speed * Math.random() - this.speed / 2;
   }
 
   getCoords() {
