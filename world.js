@@ -12,8 +12,9 @@ export default class World {
     isRandomParticleRadius: true,
     isRandomParticleColor: false,
     isSquare: false,
-    isTriangle: false,
+    isRhombus: false,
     isCircle: true,
+    isPolygon: false,
     isMouseRepulsion: true,
     isMouseEncounter: false,
     isInfiniteLine: false,
@@ -102,14 +103,17 @@ export default class World {
   getAvailableParticleTypes() {
     const availableTypes = [];
 
+    if(this.options.isPolygon) {
+      availableTypes.push(HelperManager.getRandomNumberInRang(5, 15));
+    }
     if (this.options.isCircle) {
       availableTypes.push('circle');
     }
     if (this.options.isSquare) {
       availableTypes.push('square');
     }
-    if (this.options.isTriangle) {
-      availableTypes.push('triangle');
+    if (this.options.isRhombus) {
+      availableTypes.push('rhombus');
     }
 
     return availableTypes;
@@ -137,7 +141,10 @@ export default class World {
         particle.updateDirectionToPoint(this.mouseInstance.getCoords());
       }
 
-      particle.changeDirection(this.options.isInfiniteLife);
+      if (!this.options.isMouseEncounter
+        || !HelperManager.isCoordsEquals(particle.getCoords(), this.mouseInstance.getCoords(), 1)) {
+        particle.changeDirection(this.options.isInfiniteLife);
+      }
 
       if (!this.options.isInfiniteLife && particle.radius <= this.options.destroyParticleIn) {
         this.destroyAndCreateParticle(index);
@@ -151,13 +158,19 @@ export default class World {
 
   getDrawerByParticleType(type) {
     const canvasInstance = this.canvasInstance;
+
+    if(typeof type === "number") {
+      return canvasInstance.drawPolygon.bind(canvasInstance, type);
+    }
+
+
     switch (type) {
       case 'circle':
         return canvasInstance.drawCircle.bind(canvasInstance);
       case 'square':
         return canvasInstance.drawSquare.bind(canvasInstance);
-      case 'triangle':
-        return canvasInstance.drawTriangle.bind(canvasInstance);
+      case 'rhombus':
+        return canvasInstance.drawRhombus.bind(canvasInstance);
       default:
         return canvasInstance.drawCircle.bind(canvasInstance);
     }

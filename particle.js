@@ -32,6 +32,22 @@ export default class Particle {
     !isXAvailable && (this.directionX *= -1);
     !isYAvailable && (this.directionY *= -1);
 
+    if(this.y - this.radius < 0) {
+      this.y = this.radius;
+    }
+
+    if(this.y + this.radius > window.innerHeight) {
+      this.y = window.innerHeight - this.radius;
+    }
+
+    if(this.x - this.radius < 0) {
+      this.x = this.radius;
+    }
+
+    if(this.x + this.radius > window.innerWidth) {
+      this.x = window.innerWidth - this.radius;
+    }
+
     if (!isInfiniteLife) {
       this.radius -= this.radius / (this.lifeOfParticle + Math.random() * this.lifeOfParticle);
     }

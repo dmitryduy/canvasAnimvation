@@ -49,4 +49,12 @@ export default class HelperManager {
     }
     return 4;
   }
+
+  static isCoordsEquals(point1, point2, epsilon) {
+    return Math.abs(point1[0] - point2[0]) < epsilon && Math.abs(point1[1] - point2[1]) < epsilon;
+  }
+
+  static getRandomNumberInRang(start, end) {
+    return Math.floor(Math.random() * (end - start)) + start;
+  }
 }

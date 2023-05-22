@@ -44,8 +44,6 @@ export default class FormManager {
     });
 
     this.numericContainer.appendChild(label);
-
-    return label;
   }
 
   createCheckbox(isChecked, description, option) {
@@ -56,8 +54,6 @@ export default class FormManager {
     });
 
     this.selectContainer.appendChild(label);
-
-    return label;
   }
 
   createMusicCheckbox(isChecked, description, path) {
@@ -74,8 +70,6 @@ export default class FormManager {
     });
 
     this.selectContainer.appendChild(label);
-
-    return label;
   }
 
   createColor(startValue, description, option) {
@@ -86,8 +80,6 @@ export default class FormManager {
     });
 
     this.selectContainer.appendChild(label);
-
-    return label;
   }
 
   createInput(startValue, description, type, labelClassName) {

@@ -42,22 +42,27 @@ export default class Canvas {
   }
 
   drawSquare(color, coords, radius) {
-    const size = radius * Math.sqrt(2);
+    const size = radius * 2;
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(coords[0] - size/2, coords[1] - size/2, size, size);
+    this.ctx.fillRect(coords[0] - size / 2, coords[1] - size / 2, size, size);
   }
 
-  drawTriangle(color, coords, radius) {
+  drawRhombus(color, coords, radius) {
+    this.drawPolygon(4, color, coords, radius);
+  }
+
+  drawPolygon(sizes, color, coords, radius) {
     this.ctx.fillStyle = color;
+
     this.ctx.beginPath();
-    this.ctx.moveTo(coords[0] + radius, coords[1]);
-    for (let i = 1; i <= 3; i++) {
-      const angle = i * (Math.PI * 2 / 3);
-      const x = coords[0] + radius * Math.cos(angle);
-      const y = coords[1] + radius * Math.sin(angle);
+    this.ctx.moveTo(coords[0], coords[1]);
+    for (let i = 0; i <= sizes; i++) {
+      const x = coords[0] + radius * Math.cos(2 * i * Math.PI / sizes - Math.PI / 2);
+      const y = coords[1] + radius * Math.sin(2 * i * Math.PI / sizes - Math.PI / 2);
       this.ctx.lineTo(x, y);
     }
     this.ctx.closePath();
+
     this.ctx.fill();
   }
 

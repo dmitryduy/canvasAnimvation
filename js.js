@@ -29,8 +29,9 @@ formManager.createCheckbox(false, 'Бесконечная жизнь части�
 formManager.createCheckbox(true, 'Отталкивание от мышки', 'isMouseRepulsion');
 formManager.createCheckbox(false, 'Притягивание к мыши', 'isMouseEncounter');
 formManager.createCheckbox(true, 'Круги', 'isCircle');
-formManager.createCheckbox(false, 'Треугольники', 'isTriangle');
+formManager.createCheckbox(false, 'Ромбы', 'isRhombus');
 formManager.createCheckbox(false, 'Квадраты', 'isSquare');
+formManager.createCheckbox(false, 'Многоугольники', 'isPolygon');
 
 formManager.createColor('#BF3030', 'Цвет частицы', 'particleColor');
 formManager.createColor('#BF3030', 'Цвет линий', 'lineColor');
